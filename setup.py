@@ -9,7 +9,7 @@ requirements = [
 ]
 
 setup(
-    name="auto_subtitles_translator",
+    name="subtitle",
     version="1.0",
     description="Generate subtitles for video",
     install_requires=requirements,
