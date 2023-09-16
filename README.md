@@ -19,14 +19,21 @@
 
 - 生成字幕文件并翻译成指定语言，默认翻译成中文，注意！！因为使用了Google翻译，国内如果没有vpn的话，无法使用翻译功能，只能生成英文字幕。并且需要在命令行指定--China避免调用Google服务。
 
+
   国外或者有VPN：
   `subtitle -tl /your/video/file/path/file.mp4 --targetLang "zh"`
+
   国内：
   `subtitle -tl /your/video/file/path/file.mp4 --China`
 
-- 生成字幕文件并翻译成指定语言，自动生成一个包含已翻译字幕文件的视频，通过以下命令会新生成两个文件：1.翻译后的字幕文件 2.添加了字幕的视频文件 3.原视频文件保留不变
+- 生成字幕文件并翻译成指定语言，自动生成一个包含已翻译字幕文件的视频，通过以下命令会新生成两个文件：
+  1.翻译后的字幕文件
+  2.添加了字幕的视频文件
+  3.原视频文件保留不变
+
   国外：
   `subtitle -u /your/video/file/path/file.mp4` 默认翻译成中文，需要指定对应语言添加 --targetLang "your language"
+
   国内：
   `subtitle -u /your/video/file/path/file.mp4 --China` 翻译成英文，并自动添加到视频中
 
@@ -35,8 +42,10 @@
 
 ## 效果展示
 1. 生成的字幕文件
-   ![ 字幕文件](https://github.com/viking-man/subtitles_translator/blob/main/img/srt_shoot.png)
+
+   ![ 字幕文件](img/srt_short.png)
 2. 自动生成的字幕视频
-   ![ 字幕截图](https://github.com/viking-man/subtitles_translator/blob/main/img/video_shoot.png)
+  
+   ![ 字幕截图](img/video_shoot.png)
 
 
