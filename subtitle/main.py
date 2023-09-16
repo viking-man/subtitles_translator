@@ -1,47 +1,39 @@
 import argparse
 import logging
-from type import WhisperModelEnum
-from action import Action
+from .type import WhisperModelEnum
+from .action import Action
 
-#
-if __name__ == "__main__":
-    # 命令行参数
 
+def getParser():
     parser = argparse.ArgumentParser(
         description="Generate subtitles of video by whisper transcribe",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-
     parser.add_argument("inputs", type=str, nargs="+", help="Inputs filenames/folders")
-
     parser.add_argument(
         "-t",
         "--transcribe",
         help="Transcribe videos/audio into subtitles",
         action=argparse.BooleanOptionalAction,
     )
-
     parser.add_argument(
         "-tl",
         "--translate",
         help="1.Transcribe videos/audio to subtitles. 2.Translate generated subtitles to target language",
         action=argparse.BooleanOptionalAction,
     )
-
     parser.add_argument(
         "-a",
         "--add",
         help="Add generated subtitles into video",
         action=argparse.BooleanOptionalAction,
     )
-
     parser.add_argument(
         "-u",
         "--union",
         help="Union operations,including transcribe->translate->add subtitles to video",
         action=argparse.BooleanOptionalAction,
     )
-
     parser.add_argument(
         "--outputs",
         type=str,
@@ -53,13 +45,17 @@ if __name__ == "__main__":
         default=None,
         help="The file name of target subtitle,if it's not specified,generate subtiltles for input",
     )
-
+    parser.add_argument(
+        "--China",
+        default=None,
+        help="Google translate is disable,cannot translate subtitles",
+        action=argparse.BooleanOptionalAction,
+    )
     parser.add_argument(
         "--outputDir",
         default=None,
         help="The directory of output,default is current path",
     )
-
     parser.add_argument(
         "--lang",
         type=str,
@@ -125,7 +121,6 @@ if __name__ == "__main__":
         ],
         help="The input language of transcription/translation",
     )
-
     parser.add_argument(
         "--targetLang",
         type=str,
@@ -191,7 +186,6 @@ if __name__ == "__main__":
         ],
         help="The output language of translation",
     )
-
     parser.add_argument(
         "--whisper-model",
         type=str,
@@ -205,24 +199,25 @@ if __name__ == "__main__":
         default="10m",
         help="The bitrate to export the cutted video, such as 10m, 1m, or 500k",
     )
-    parser.add_argument(
-        "--vad", help="If or not use VAD", choices=["1", "0", "auto"], default="auto"
-    )
-
     # whisper 不支持mps
     parser.add_argument(
         "--device",
         type=str,
         default=None,
         choices=["cpu", "cuda"],
-        help="Force to CPU/GPU/MPS for transcribing. In default automatically use GPU if available."
+        help="Force to CPU/GPU for transcribing. In default automatically use GPU if available."
     )
 
+    return parser
+
+
+def main():
+    # 命令行参数
+    parser = getParser()
     logging.basicConfig(
         format="[parrot:%(filename)s:L%(lineno)d] %(levelname)-6s %(message)s"
     )
     logging.getLogger().setLevel(logging.INFO)
-
     args = parser.parse_args()
     print(args)
     if args.transcribe:
@@ -240,3 +235,8 @@ if __name__ == "__main__":
     elif args.union:
         logging.info(f"Union operations for [{args.inputs}] start")
         Action(args).union()
+
+
+#
+if __name__ == "__main__":
+    main()

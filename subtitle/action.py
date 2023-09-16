@@ -1,20 +1,11 @@
 import logging
 import os.path
-import random
-import shutil
-import string
 import time
-from type import WhisperModelEnum
-from whisper_model import WhisperModel
-import utils
-import srt
-import opencc
-import datetime
+from .whisper_model import WhisperModel
 from whisper.utils import get_writer
 from whisper.audio import load_audio
-from pathlib import Path
 from translatepy import Translate
-import ffmpeg_utils
+from .ffmpeg_utils import add_subtitles
 
 
 class Action:
@@ -71,17 +62,19 @@ class Action:
             translate_result = self.whisper_model.translate(audio, self.args.lang)
             logging.info(f'Translate result for {input} is {translate_result}')
 
-            translator = Translate()
-            # translate
-            for i in range(len(translate_result["segments"])):
-                segment = translate_result["segments"][i]
-                try:
-                    translate_text = translator.translate(segment["text"], self.target_lang)
-                except Exception as e:
-                    # 处理其他所有类型的异常
-                    print("An exception occurred:", str(e))
-                    translate_text = segment["text"]
-                translate_result["segments"][i]["text"] = translate_text.result
+            # 国内无法使用google翻译，默认使用英语
+            if not self.args.China:
+                translator = Translate()
+                # translate
+                for i in range(len(translate_result["segments"])):
+                    segment = translate_result["segments"][i]
+                    try:
+                        translate_text = translator.translate(segment["text"], self.target_lang)
+                    except Exception as e:
+                        # 处理其他所有类型的异常
+                        print("An exception occurred:", str(e))
+                        translate_text = segment["text"]
+                    translate_result["segments"][i]["text"] = translate_text.result
 
             srt_writer = get_writer("srt", output_dir)
             # save srt_file
@@ -124,17 +117,26 @@ class Action:
 
             # 使用ffmpeg添加字幕
             logging.info(f'input_file->{input},subtitle_file->{target_subtitle},output_file->{output}')
-            ffmpeg_utils.add_subtitles(input, target_subtitle, output)
+            add_subtitles(input, target_subtitle, output)
 
             logging.info(f'Add subtitles for {input} end,output->{output},time->[{time.time() - start_time:.1f}]')
 
     def union(self):
+        start_time = time.time()
         # translate
         self.translate()
         # add subtitles to video
         self.addSubtitles(None)
 
-        logging.info(f'Union operations for  end')
+        logging.info(f'Union operations end,time->[{time.time() - start_time:.1f}]')
+
+    def unionForChina(self):
+        # translate to english
+        self.translate()
+        # add subtitle to video
+        self.addSubtitles(None)
+
+        logging.info(f'Union operations for China end')
 
     def make_output_dir(self, output_dir, input_dir):
         if output_dir == None:
