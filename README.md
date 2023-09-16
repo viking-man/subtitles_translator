@@ -18,6 +18,7 @@
   `subtitle -t /your/video/file/path/file.mp4`
 
 - 生成字幕文件并翻译成指定语言，默认翻译成中文，注意！！因为使用了Google翻译，国内如果没有vpn的话，无法使用翻译功能，只能生成英文字幕。并且需要在命令行指定--China避免调用Google服务。
+
   国外或者有VPN：
   `subtitle -tl /your/video/file/path/file.mp4 --targetLang "zh"`
   国内：
@@ -30,13 +31,12 @@
   `subtitle -u /your/video/file/path/file.mp4 --China` 翻译成英文，并自动添加到视频中
 
 - 添加指定的字幕文件到视频中，此功能可以由ffmpeg单独完成，程序也只是调用了ffmpeg的方法
-
   `subtitle -a /your/video/file/path/file.mp4 --targetSubtitle "your subtitle file path"`
 
 ## 效果展示
 1. 生成的字幕文件
-   
+   ![ 字幕文件](https://github.com/viking-man/subtitles_translator/blob/main/img/srt_shoot.png)
 2. 自动生成的字幕视频
-  
+   ![ 字幕截图](https://github.com/viking-man/subtitles_translator/blob/main/img/video_shoot.png)
 
 
