@@ -9,11 +9,11 @@ requirements = [
 ]
 
 setup(
-    name="subtitle",
+    name="auto_subtitles_translator",
     version="1.0",
     description="Generate subtitles for video",
     install_requires=requirements,
-    packages=["subtitle"],
+    packages=find_packages(),
     entry_points={
         "console_scripts": [
             "subtitle = subtitle.main:main",
