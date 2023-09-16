@@ -13,6 +13,7 @@ python版本需要>=3.9
 1. `git clone git@github.com:viking-man/subtitles_translator.git`
 2. `cd subtitles_translator`
 3. `pip install .`
+4. `brew install ffmpeg`  需要自己安装ffmpeg，通过pip安装的话，与whisper使用的ffmpeg-python有冲突
    
 ## 常用命令
 - 生成对应语言的字幕文件，生成的字幕文件放到与video文件同一目录下
