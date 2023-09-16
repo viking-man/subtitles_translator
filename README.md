@@ -7,7 +7,9 @@
 
 其中生成字幕文件、翻译字幕文件、添加字幕文件功能相对独立，使用者可以先自己生成需要的字幕文件，修改后再通过程序添加字幕到视频中
 
-## 下载安装
+## 下载安装    
+python版本需要>=3.9  
+
 1. `git clone git@github.com:viking-man/subtitles_translator.git`
 2. `cd subtitles_translator`
 3. `pip install .`
