@@ -38,10 +38,11 @@
   `subtitle -u /your/video/file/path/file.mp4 --China` 翻译成英文，并自动添加到视频中
 
 - 添加指定的字幕文件到视频中，此功能可以由ffmpeg单独完成，程序也只是调用了ffmpeg的方法
+  
   `subtitle -a /your/video/file/path/file.mp4 --targetSubtitle "your subtitle file path"`
 
 ## 效果展示
-1. 生成的字幕文件
+1. 生成的.srt字幕文件
 
    ![ 字幕文件](img/srt_short.png)
 2. 自动生成的字幕视频
