@@ -30,12 +30,14 @@ python版本需要>=3.9
   `subtitle -tl /your/video/file/path/file.mp4 --China`
 
 - 生成字幕文件并翻译成指定语言，自动生成一个包含已翻译字幕文件的视频，通过以下命令会新生成两个文件：
+
+  
   1.翻译后的字幕文件
   2.添加了字幕的视频文件
   3.原视频文件保留不变
 
   国外：
-  `subtitle -u /your/video/file/path/file.mp4` 默认翻译成中文，需要指定对应语言添加 --targetLang "your language"
+  `subtitle -u /your/video/file/path/file.mp4` 默认翻译成中文，需要指定对应语言添加 `--targetLang "your language"`
 
   国内：
   `subtitle -u /your/video/file/path/file.mp4 --China` 翻译成英文，并自动添加到视频中
