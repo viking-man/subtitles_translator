@@ -48,8 +48,14 @@ python版本需要>=3.9
 1. 生成的.srt字幕文件
 
    ![ 字幕文件](img/srt_short.png)
-2. 自动生成的字幕视频
+2. 自动生成的字幕视频截图
   
    ![ 字幕截图](img/video_shoot.png)
+
+3. 视频样例1:韩语->汉语字幕自动添加
+   ![ 子瑜的秘密好友](video/tzuyu_secret_friend_subtitle.mp4)
+
+4. 视频样例2:英语->汉语字幕自动添加
+   ![ 川普的演讲](video/trump_speech_subtitle.mp4)
 
 
