@@ -20,7 +20,7 @@ python版本需要>=3.9
 
   `subtitle -t /your/video/file/path/file.mp4`
 
-- 生成字幕文件并翻译成指定语言，默认翻译成中文，注意！！因为使用了Google翻译，国内如果没有vpn的话，无法使用翻译功能，只能生成英文字幕。并且需要在命令行指定--China避免调用Google服务。
+- 生成字幕文件并翻译成指定语言，默认翻译成中文，注意！！因为使用了Google翻译，国内如果没有vpn的话，无法使用翻译功能，只能生成英文字幕。并且需要在命令行指定`--China`避免调用Google服务。
 
 
   国外或者有VPN：
@@ -43,6 +43,19 @@ python版本需要>=3.9
 - 添加指定的字幕文件到视频中，此功能可以由ffmpeg单独完成，程序也只是调用了ffmpeg的方法
   
   `subtitle -a /your/video/file/path/file.mp4 --targetSubtitles "your subtitle file path"`
+
+## 其他可选参数  
+
+| 参数 | 作用 | 示例 |
+|--------|--------|--------|
+|  --outputDir  | 指定文件输出路径，默认为源视频文件的相同目录  | --outputDir /Users/your_name/xx/xx/xx   |
+| --outputs  | 指定输出文件名称，需要与inputs一一对应，默认名称“源文件名称”+“_subtitles”+源文件格式   | --outputs xxxx.mp4   |
+| --lang  | 源文件的用的语言，默认会自动检测   | --lang “Korean”   |
+| --targetLang  | 想要翻译成的语言，默认为'zh'，翻译成中文   | --targetLang "Japanese"   |
+| --whisper-model  | whisper的模型类型，默认为small，翻译效果一般，有足够的内存和网速，可以选择medium或者large   | --whisper-model medium   |
+| --device  | 代码运行的显卡类型，默认使用cuda，没有的话使用cpu   | --device cuda   |
+
+
 
 ## 效果展示
 1. 生成的.srt字幕文件
