@@ -42,7 +42,7 @@ python版本需要>=3.9
 
 - 添加指定的字幕文件到视频中，此功能可以由ffmpeg单独完成，程序也只是调用了ffmpeg的方法
   
-  `subtitle -a /your/video/file/path/file.mp4 --targetSubtitle "your subtitle file path"`
+  `subtitle -a /your/video/file/path/file.mp4 --targetSubtitles "your subtitle file path"`
 
 ## 效果展示
 1. 生成的.srt字幕文件
@@ -53,9 +53,14 @@ python版本需要>=3.9
    ![ 字幕截图](img/video_shoot.png)
 
 3. 视频样例1:韩语->汉语字幕自动添加
-   ![ 子瑜的秘密好友](video/tzuyu_secret_friend_subtitle.mp4)
+   <a href="video/tzuyu_secret_friend_subtitle.mp4">
+    <img src="img/video_shoot.png" alt="子瑜的秘密挚友">
+   </a>
+
 
 4. 视频样例2:英语->汉语字幕自动添加
-   ![ 川普的演讲](video/trump_speech_subtitle.mp4)
+   <a href="video/trump_speech_subtitle.mp4">
+    <img src="img/trump_speech.png" alt="川普演讲">
+   </a>
 
 
