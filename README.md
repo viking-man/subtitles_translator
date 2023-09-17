@@ -61,17 +61,14 @@ python版本需要>=3.9
 1. 生成的.srt字幕文件
 
    ![ 字幕文件](img/srt_short.png)
-2. 自动生成的字幕视频截图
-  
-   ![ 字幕截图](img/video_shoot.png)
 
-3. 视频样例1:韩语->汉语字幕自动添加
+2. 视频样例1:韩语->汉语字幕自动添加
    <a href="video/tzuyu_secret_friend_subtitle.mp4">
     <img src="img/video_shoot.png" alt="子瑜的秘密挚友">
    </a>
 
 
-4. 视频样例2:英语->汉语字幕自动添加
+3. 视频样例2:英语->汉语字幕自动添加
    <a href="video/trump_speech_subtitle.mp4">
     <img src="img/trump_speech.png" alt="川普演讲">
    </a>
