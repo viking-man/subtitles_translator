@@ -89,14 +89,14 @@ class Action:
     def add_subtitles(self):
 
         # 没有指定字幕文件，先自动生成
-        target_subtitle = self.args.targetSubtitle
-        if target_subtitle is None:
+        target_subtitles = self.args.targetSubtitles
+        if target_subtitles is None:
             logging.info(f'Did not specify target subtitles,transcribe subtitles for {self.args.inputs}')
             self.transcribe()
 
-        self.addSubtitles(target_subtitle)
+        self.addSubtitles()
 
-    def addSubtitles(self, target_subtitle):
+    def addSubtitles(self):
         for i in range(len(self.args.inputs)):
 
             input = self.args.inputs[i]
@@ -104,10 +104,12 @@ class Action:
             start_time = time.time()
             input_name, suffix = os.path.splitext(input)
             # 如果没有指定字幕文件，获取自动生成的
-            if target_subtitle is None:
+            if self.args.targetSubtitles is None:
                 # 默认是当前路径
                 output_dir = self.make_output_dir(self.args.outputDir, os.path.dirname(input))
                 target_subtitle = os.path.join(output_dir, input_name + ".srt")
+            else:
+                target_subtitle = self.args.targetSubtitles[i]
 
             outputs = self.args.outputs
             if outputs is not None:
@@ -126,7 +128,7 @@ class Action:
         # translate
         self.translate()
         # add subtitles to video
-        self.addSubtitles(None)
+        self.addSubtitles()
 
         logging.info(f'Union operations end,time->[{time.time() - start_time:.1f}]')
 
@@ -134,7 +136,7 @@ class Action:
         # translate to english
         self.translate()
         # add subtitle to video
-        self.addSubtitles(None)
+        self.addSubtitles()
 
         logging.info(f'Union operations for China end')
 

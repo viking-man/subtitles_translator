@@ -41,9 +41,10 @@ def getParser():
         help="Outputs filenames/folders"
     )
     parser.add_argument(
-        "--targetSubtitle",
+        "--targetSubtitles",
+        nargs="+",
         default=None,
-        help="The file name of target subtitle,if it's not specified,generate subtiltles for input",
+        help="The file name of target subtitles,if it's not specified,generate subtiltles for input",
     )
     parser.add_argument(
         "--China",
@@ -229,7 +230,7 @@ def main():
         Action(args).translate()
 
     elif args.add:
-        logging.info(f"Add subtitle->[{args.targetSubtitle}] for [{args.inputs}] start")
+        logging.info(f"Add subtitle->[{args.targetSubtitles}] for [{args.inputs}] start")
         Action(args).add_subtitles()
 
     elif args.union:
