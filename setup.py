@@ -4,7 +4,7 @@ requirements = [
     "openai-whisper",
     "parameterized",
     "srt",
-    "ffmpeg-python",
+    # "ffmpeg-python",
     "translatepy"
 ]
 

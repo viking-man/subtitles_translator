@@ -20,13 +20,19 @@ def test_tranlator():
 
 
 def test_path():
-    path = Path("test.mp4")
-    assert path.stem == "test"
+    path = Path("assets/tzuyu_20.mp4")
+    assert path.stem == "tzuyu_20"
     assert path.suffix == ".mp4"
+    print("resolve:" + str(path.resolve()))
+    print("absolute:" + str(path.absolute().parent))
+    # assert path.resolve().name == "xxx/xxxx/test"
     print(path)
     print(path.name)
 
-    folder = os.path.abspath("test.mp3")
+    folder = os.path.abspath("xxx/")
+    print("os-absolute->" + folder)
+
+    folder = os.path.abspath("xxx/test.mp3")
     print(folder)
     print(os.getcwd())
     assert os.path.exists(os.path.abspath("."))

@@ -26,3 +26,37 @@ ch.setFormatter(fmt)
 logger.addHandler(file_handler)
 # 日志输出到控制台
 logger.addHandler(ch)
+
+TEST_ASSETS_PATH = "assets/"
+TEST_MEDIA_FILE = "tzuyu_20.mp4"
+
+
+class TestArgs:
+    def __init__(
+            self,
+            encoding="utf-8",
+            sampling_rate=16000,
+            bitrate="10m",
+            lang="Korean",
+            whisper_model="small",
+            device=None,
+            targetLang="zh",
+            vad_model=None,
+            outputDir=None,
+            outputs=None,
+            targetSubtitles=None,
+            China=None
+    ):
+        self.inputs = []
+        self.bitrate = bitrate
+        self.encoding = encoding
+        self.sampling_rate = sampling_rate
+        self.lang = lang
+        self.whisper_model = whisper_model
+        self.device = device
+        self.targetLang = targetLang
+        self.vad_model = vad_model
+        self.outputDir = outputDir
+        self.outputs = outputs
+        self.targetSubtitles = targetSubtitles
+        self.China = China
