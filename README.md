@@ -62,7 +62,7 @@ python版本需要>=3.9
 ## 效果展示
 1. 生成的.srt字幕文件
 
-   ![ 字幕文件](img/srt_short.png)
+   [![字幕文件](img/srt_short.png)](srt/tzuyu_secret_friend.srt)
 
 2. 视频样例1:韩语->汉语字幕自动添加
    <a href="video/tzuyu_secret_friend_subtitle.mp4">
