@@ -46,6 +46,10 @@ python版本需要>=3.9
   
   `subtitle -a /your/video/file/path/file.mp4 --targetSubtitles "your subtitle file path"`
 
+- 生成视频对应语言的字幕文件，并添加字幕到视频中，不包含翻译功能
+  `subtitle -ut /your/video/file/path/file.mp4`
+  
+
 ## 其他可选参数  
 
 | 参数 | 作用 | 示例 |
