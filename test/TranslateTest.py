@@ -116,3 +116,17 @@ class testTranslate(unittest.TestCase):
         assert os.path.exists(subtitle_video)
 
         self.removeFileAfterTest()
+
+    def test_union_transcribe(self):
+        logging.info("检查不包含翻译的联合操作")
+        args = TestArgs()
+        full_path = TEST_ASSETS_PATH + TEST_MEDIA_FILE
+        args.inputs = [full_path]
+        Action(args).unionForTranscribe()
+
+        srt_ = full_path.split(".")[0] + ".srt"
+        assert os.path.exists(srt_)
+        subtitle_video = full_path.split(".")[0] + "_subtitle.mp4"
+        assert os.path.exists(subtitle_video)
+
+        self.removeFileAfterTest()

@@ -36,14 +36,10 @@ class Action:
             transcribe_result = self.whisper_model.transcribe(audio, self.args.lang)
             logging.info(f'Transcribe result for {input} is {transcribe_result}')
 
-            logging.info(f'absolute->{str(path.absolute().parent)}')
+            # 输出目录
             output_dir = self.make_output_dir(self.args.outputDir, str(path.absolute().parent))
-
-            srt_writer = get_writer("srt", output_dir)
-
-            srt_file = path.stem + ".srt"
-            logging.info(f"output_dir->{output_dir},srt->{srt_file}")
-            srt_writer(transcribe_result, srt_file)
+            # 生成字幕文件
+            srt_file = self.writeSrtFile(output_dir, path, transcribe_result)
 
             srt_full_path = os.path.join(output_dir, srt_file)
             assert os.path.exists(srt_full_path), f"SRT file not generated?"
@@ -51,6 +47,14 @@ class Action:
 
             # self._save_md(filename + ".md", output, input)
             # logging.info(f'Saved texts to {filename + ".md"} to mark sentences')
+
+    # 使用whisper自带的writer生成字幕文件
+    def writeSrtFile(self, output_dir, path, transcribe_result):
+        srt_writer = get_writer("srt", output_dir)
+        srt_file = path.stem + ".srt"
+        logging.info(f"output_dir->{output_dir},srt->{srt_file}")
+        srt_writer(transcribe_result, srt_file)
+        return srt_file
 
     def translate(self):
         for input in self.args.inputs:
@@ -68,10 +72,8 @@ class Action:
 
             # 默认是输入文件的当前目录
             output_dir = self.make_output_dir(self.args.outputDir, str(path.absolute().parent))
-            srt_writer = get_writer("srt", output_dir)
-            # save srt_file
-            srt_file = path.stem + ".srt"
-            srt_writer(translate_result, srt_file)
+            # 生成字幕文件
+            srt_file = self.writeSrtFile(output_dir, path, translate_result)
 
             srt_full_path = os.path.join(output_dir, srt_file)
             assert os.path.exists(srt_full_path), f"SRT file not generated?"
@@ -144,13 +146,14 @@ class Action:
 
         logging.info(f'Union operations end,time->[{time.time() - start_time:.1f}]')
 
-    def unionForChina(self):
+    # 生成视频对应的语言字幕，不做翻译
+    def unionForTranscribe(self):
         # translate to english
-        self.translate()
+        self.transcribe()
         # add subtitle to video
         self.addSubtitles()
 
-        logging.info(f'Union operations for China end')
+        logging.info(f'Union operations for Transcribe end')
 
     def make_output_dir(self, output_dir, input_dir):
         if output_dir is None:

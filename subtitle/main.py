@@ -35,6 +35,12 @@ def getParser():
         action=argparse.BooleanOptionalAction,
     )
     parser.add_argument(
+        "-ut",
+        "--unionTranscribe",
+        help="Union operations,including transcribe->add subtitles to video,not including translate",
+        action=argparse.BooleanOptionalAction,
+    )
+    parser.add_argument(
         "--outputs",
         type=str,
         nargs="+",
@@ -236,6 +242,9 @@ def main():
     elif args.union:
         logging.info(f"Union operations for [{args.inputs}] start")
         Action(args).union()
+    elif args.unionTranscribe:
+        logging.info(f"Union operations not including translate for [{args.inputs}] start")
+        Action(args).unionForTranscribe()
 
 
 #
