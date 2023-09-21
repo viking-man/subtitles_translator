@@ -14,6 +14,8 @@ python版本需要>=3.9
 2. `cd subtitles_translator`
 3. `pip install .`
 4. `brew install ffmpeg`  需要自己安装ffmpeg，通过pip安装的话，与whisper使用的ffmpeg-python有冲突
+
+windows系统命令与上面差不多，第三步直接使用`python setup.py install`命令安装即可；ffmpeg需要自己安装
    
 ## 常用命令
 - 生成对应语言的字幕文件，生成的字幕文件放到与video文件同一目录下
@@ -24,7 +26,7 @@ python版本需要>=3.9
 
 
   国外或者有VPN：
-  `subtitle -tl /your/video/file/path/file.mp4 --targetLang "zh"`
+  `subtitle -tl /your/video/file/path/file.mp4 --target-lang "zh"`
 
   国内：
   `subtitle -tl /your/video/file/path/file.mp4 --China`
@@ -37,14 +39,14 @@ python版本需要>=3.9
   3.原视频文件保留不变
 
   国外：
-  `subtitle -u /your/video/file/path/file.mp4` 默认翻译成中文，需要指定对应语言添加 `--targetLang "your language"`
+  `subtitle -u /your/video/file/path/file.mp4` 默认翻译成中文，需要指定对应语言添加 `--target-lang "your language"`
 
   国内：
   `subtitle -u /your/video/file/path/file.mp4 --China` 翻译成英文，并自动添加到视频中
 
 - 添加指定的字幕文件到视频中，此功能可以由ffmpeg单独完成，程序也只是调用了ffmpeg的方法
   
-  `subtitle -a /your/video/file/path/file.mp4 --targetSubtitles "your subtitle file path"`
+  `subtitle -a /your/video/file/path/file.mp4 --target-subtitles "your subtitle file path"`
 
 - 生成视频对应语言的字幕文件，并添加字幕到视频中，不包含翻译功能
 
@@ -55,10 +57,10 @@ python版本需要>=3.9
 
 | 参数 | 作用 | 示例 |
 |--------|--------|--------|
-|  --outputDir  | 指定文件输出路径，默认为源视频文件的相同目录  | --outputDir /Users/your_name/xx/xx/xx   |
+|  --output-dir  | 指定文件输出路径，默认为源视频文件的相同目录  | --outputDir /Users/your_name/xx/xx/xx   |
 | --outputs  | 指定输出文件名称，需要与inputs一一对应，默认名称“源文件名称”+“_subtitles”+源文件格式   | --outputs xxxx.mp4   |
 | --lang  | 源文件的用的语言，默认会自动检测   | --lang “Korean”   |
-| --targetLang  | 想要翻译成的语言，默认为'zh'，翻译成中文   | --targetLang "Japanese"   |
+| --target-lang  | 想要翻译成的语言，默认为'zh'，翻译成中文   | --targetLang "Japanese"   |
 | --whisper-model  | whisper的模型类型，默认为small，翻译效果一般，有足够的内存和网速，可以选择medium或者large   | --whisper-model medium   |
 | --device  | 代码运行的显卡类型，默认使用cuda，没有的话使用cpu   | --device cuda   |
 
