@@ -33,7 +33,7 @@ def add_subtitles(video_file, subtitle_file, output_file):
     output = ffmpeg.output(
         input_video,  # 输入视频文件
         input_subtitle,  # 输入字幕文件
-        Path(output_file),
+        output_file,
         # vcodec='copy',  # 视频编解码器，此处保持原样
         acodec='copy',  # 音频编解码器，此处保持原样
         scodec='mov_text',  # 字幕编解码器
