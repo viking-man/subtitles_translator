@@ -14,7 +14,7 @@ class Action:
         self.args = args
         self.sampling_rate = 16000
         self.lang = self.args.lang
-        self.target_lang = self.args.targetLang
+        self.target_lang = self.args.target_lang
         self.whisper_model = None
         self.vad_model = None
         self.detect_speech = None
@@ -37,7 +37,7 @@ class Action:
             logging.info(f'Transcribe result for {input} is {transcribe_result}')
 
             # 输出目录
-            output_dir = self.make_output_dir(self.args.outputDir, str(path.absolute().parent))
+            output_dir = self.make_output_dir(self.args.output_dir, str(path.absolute().parent))
             # 生成字幕文件
             srt_file = self.writeSrtFile(output_dir, path, transcribe_result)
 
@@ -50,10 +50,16 @@ class Action:
 
     # 使用whisper自带的writer生成字幕文件
     def writeSrtFile(self, output_dir, path, transcribe_result):
+
+        for segment in transcribe_result["segments"]:
+            # 不想用到whsiper的新功能，高亮和字符限制的，只能用到英文上
+            if "words" in segment:
+                del segment["words"]
+
         srt_writer = get_writer("srt", output_dir)
         srt_file = path.stem + ".srt"
         logging.info(f"output_dir->{output_dir},srt->{srt_file}")
-        srt_writer(transcribe_result, srt_file)
+        srt_writer(transcribe_result, srt_file, {"max_line_width": 47, "max_line_count": 1, "highlight_words": False})
         return srt_file
 
     def translate(self):
@@ -69,9 +75,10 @@ class Action:
 
             # 国内无法使用google翻译，默认使用英语
             self.translateToTargetLang(translate_result)
+            logging.info(f'Translated result->{translate_result}')
 
             # 默认是输入文件的当前目录
-            output_dir = self.make_output_dir(self.args.outputDir, str(path.absolute().parent))
+            output_dir = self.make_output_dir(self.args.output_dir, str(path.absolute().parent))
             # 生成字幕文件
             srt_file = self.writeSrtFile(output_dir, path, translate_result)
 
@@ -82,14 +89,15 @@ class Action:
         logging.info(f'Translate for {self.args.inputs} end')
 
     def translateToTargetLang(self, translate_result):
-        if not self.args.China and self.args.targetLang is not "en":
-            logging.info(f"Translate to {self.args.targetLang} start.")
+        if not self.args.China and self.args.target_lang is not "en":
+            logging.info(f"Translate to {self.args.target_lang} start.")
             translator = Translate()
             # translate
             for i in range(len(translate_result["segments"])):
                 segment = translate_result["segments"][i]
                 try:
-                    translate_text = translator.translate(segment["text"], self.target_lang).result
+                    text_ = segment["text"].replace("<u>", "").replace("</u>", "")
+                    translate_text = translator.translate(text_, self.target_lang).result
                 except Exception as e:
                     # 处理其他所有类型的异常
                     print("An exception occurred:", str(e))
@@ -99,7 +107,7 @@ class Action:
     def add_subtitles(self):
 
         # 没有指定字幕文件，先自动生成
-        target_subtitles = self.args.targetSubtitles
+        target_subtitles = self.args.target_subtitles
         if target_subtitles is None:
             logging.info(f'Did not specify target subtitles,transcribe subtitles for {self.args.inputs}')
             self.transcribe()
@@ -116,13 +124,13 @@ class Action:
             input_name = path.stem
             suffix = path.suffix
 
-            output_dir = self.make_output_dir(self.args.outputDir, str(path.absolute().parent))
+            output_dir = self.make_output_dir(self.args.output_dir, str(path.absolute().parent))
             # 如果没有指定字幕文件，获取自动生成的字幕文件
-            if self.args.targetSubtitles is None:
+            if self.args.target_subtitles is None:
                 # 默认是当前路径
                 target_subtitle = os.path.join(output_dir, input_name + ".srt")
             else:
-                target_subtitle = self.args.targetSubtitles[i]
+                target_subtitle = self.args.target_subtitles[i]
 
             # 文件输出路径
             outputs = self.args.outputs

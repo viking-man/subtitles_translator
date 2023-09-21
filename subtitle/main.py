@@ -36,7 +36,7 @@ def getParser():
     )
     parser.add_argument(
         "-ut",
-        "--unionTranscribe",
+        "--union-transcribe",
         help="Union operations,including transcribe->add subtitles to video,not including translate",
         action=argparse.BooleanOptionalAction,
     )
@@ -47,7 +47,7 @@ def getParser():
         help="Outputs filenames/folders"
     )
     parser.add_argument(
-        "--targetSubtitles",
+        "--target-subtitles",
         nargs="+",
         default=None,
         help="The file name of target subtitles,if it's not specified,generate subtiltles for input",
@@ -59,7 +59,7 @@ def getParser():
         action=argparse.BooleanOptionalAction,
     )
     parser.add_argument(
-        "--outputDir",
+        "--output-dir",
         default=None,
         help="The directory of output,default is current path",
     )
@@ -129,7 +129,7 @@ def getParser():
         help="The input language of transcription/translation",
     )
     parser.add_argument(
-        "--targetLang",
+        "--target-lang",
         type=str,
         default="zh",
         choices=[
@@ -242,7 +242,7 @@ def main():
     elif args.union:
         logging.info(f"Union operations for [{args.inputs}] start")
         Action(args).union()
-    elif args.unionTranscribe:
+    elif args.union_transcribe:
         logging.info(f"Union operations not including translate for [{args.inputs}] start")
         Action(args).unionForTranscribe()
 

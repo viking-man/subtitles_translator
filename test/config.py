@@ -40,11 +40,11 @@ class TestArgs:
             lang="Korean",
             whisper_model="small",
             device=None,
-            targetLang="zh",
+            target_lang="zh",
             vad_model=None,
-            outputDir=None,
+            output_dir=None,
             outputs=None,
-            targetSubtitles=None,
+            target_subtitles=None,
             China=None
     ):
         self.inputs = []
@@ -54,9 +54,9 @@ class TestArgs:
         self.lang = lang
         self.whisper_model = whisper_model
         self.device = device
-        self.targetLang = targetLang
+        self.target_lang = target_lang
         self.vad_model = vad_model
-        self.outputDir = outputDir
+        self.output_dir = output_dir
         self.outputs = outputs
-        self.targetSubtitles = targetSubtitles
+        self.target_subtitles = target_subtitles
         self.China = China

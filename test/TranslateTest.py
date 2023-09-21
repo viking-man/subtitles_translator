@@ -51,7 +51,7 @@ class testTranslate(unittest.TestCase):
         args = TestArgs()
         full_path = TEST_ASSETS_PATH + TEST_MEDIA_FILE
         args.inputs = [full_path]
-        args.targetLang = "en"
+        args.target_lang = "en"
         Action(args).translate()
 
         srt_ = full_path.split(".")[0] + ".srt"
@@ -109,7 +109,7 @@ class testTranslate(unittest.TestCase):
         args = TestArgs()
         full_path = TEST_ASSETS_PATH + TEST_MEDIA_FILE
         args.inputs = [full_path]
-        args.targetSubtitles = ["srt/tzuyu_20.srt"]
+        args.target_subtitles = ["srt/tzuyu_20.srt"]
         Action(args).add_subtitles()
 
         subtitle_video = full_path.split(".")[0] + "_subtitle.mp4"
