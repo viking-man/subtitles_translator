@@ -7,6 +7,7 @@ from pathlib import Path
 import torch
 import os
 from subtitle.main import main
+from subtitle import ffmpeg_utils
 
 
 def test_tranlator():
@@ -76,4 +77,4 @@ def escape_windows_path(path):
 def test_escape():
     path = "D:\\tools\\python\\test.srt"
     print(path)
-    print(escape_windows_path(path))
+    print(ffmpeg_utils.escape_windows_path(path))
