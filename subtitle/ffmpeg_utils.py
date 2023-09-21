@@ -5,8 +5,8 @@ from pathlib import Path
 
 def add_subtitles(video_file, subtitle_file, output_file):
     # 使用 ffmpeg.input() 来指定输入文件和字幕文件
-    input_video = ffmpeg.input(video_file)
-    input_subtitle = ffmpeg.input(subtitle_file)
+    input_video = ffmpeg.input(Path(video_file))
+    input_subtitle = ffmpeg.input(Path(subtitle_file))
 
     # 使用 filter() 添加字幕
     output = ffmpeg.output(
