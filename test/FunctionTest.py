@@ -1,3 +1,5 @@
+import re
+
 import pytest
 from translatepy import Translator
 from translatepy.translators.google import GoogleTranslate
@@ -58,3 +60,14 @@ def test_loop():
 def test_not():
     assert not None == True
     assert not False == True
+
+
+def escape_windows_path(path):
+    # 将单个反斜杠替换为双反斜杠
+    return re.sub(r'\\', r'\\\\', path)
+
+
+def test_escape():
+    path = "D:\\tools\\python\\test.srt"
+    print(path)
+    print(escape_windows_path(path))

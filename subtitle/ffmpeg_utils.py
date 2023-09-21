@@ -3,6 +3,7 @@ import ffmpeg
 import os
 import re
 import sys
+from pathlib import Path
 
 
 def escape_windows_path(path):
@@ -16,12 +17,13 @@ def is_windows():
 
 def add_subtitles(video_file, subtitle_file, output_file):
     # 使用 ffmpeg.input() 来指定输入文件和字幕文件
-    input_video = ffmpeg.input(video_file)
-    input_subtitle = ffmpeg.input(subtitle_file)
+    input_video = ffmpeg.input(Path(video_file))
+    input_subtitle = ffmpeg.input(Path(subtitle_file))
 
     # 区分系统
     if is_windows():
         subtitle_file = escape_windows_path(subtitle_file)
+    logging.info(f'subtitle_file after transfer->{subtitle_file}')
 
     # 使用 filter() 添加字幕
     output = ffmpeg.output(
@@ -32,7 +34,7 @@ def add_subtitles(video_file, subtitle_file, output_file):
         acodec='copy',  # 音频编解码器，此处保持原样
         scodec='mov_text',  # 字幕编解码器
         f='mp4',  # 输出文件格式
-        vf=f'subtitles={subtitle_file}',  # 添加字幕滤镜
+        vf=f'subtitles={Path(subtitle_file)}',  # 添加字幕滤镜
         strict='experimental',  # 使用实验性字幕编解码器
     )
 
