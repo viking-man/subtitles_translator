@@ -55,6 +55,9 @@ class Action:
             # 不想用到whsiper的新功能，高亮和字符限制的，只能用到英文上
             if "words" in segment:
                 del segment["words"]
+            # whisper字幕有点超前,延迟1s
+            segment["start"] = segment["start"] + 1
+            segment["end"] = segment["end"] + 1
 
         srt_writer = get_writer("srt", output_dir)
         srt_file = path.stem + ".srt"
