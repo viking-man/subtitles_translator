@@ -94,14 +94,14 @@ class Action:
             translator = Translate()
             # translate
             for i in range(len(translate_result["segments"])):
-                segment = translate_result["segments"][i]
+                segment_text = translate_result["segments"][i]["text"]
                 try:
-                    text_ = segment["text"].replace("<u>", "").replace("</u>", "")
+                    text_ = segment_text.replace("<u>", "").replace("</u>", "")
                     translate_text = translator.translate(text_, self.target_lang).result
                 except Exception as e:
                     # 处理其他所有类型的异常
-                    print("An exception occurred:", str(e))
-                    translate_text = segment["text"]
+                    logging.info(f"An exception occurred when translate->{segment_text},error->{str(e)}")
+                    translate_text = segment_text
                 translate_result["segments"][i]["text"] = translate_text
 
     def add_subtitles(self):
