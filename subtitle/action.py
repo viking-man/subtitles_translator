@@ -130,7 +130,7 @@ class Action:
                 # 默认是当前路径
                 target_subtitle = os.path.join(output_dir, input_name + ".srt")
             else:
-                target_subtitle = self.args.target_subtitles[i]
+                target_subtitle = str(Path(self.args.target_subtitles[i]).absolute())
 
             # 文件输出路径
             outputs = self.args.outputs

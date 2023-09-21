@@ -236,7 +236,7 @@ def main():
         Action(args).translate()
 
     elif args.add:
-        logging.info(f"Add subtitle->[{args.targetSubtitles}] for [{args.inputs}] start")
+        logging.info(f"Add subtitle->[{args.target_subtitles}] for [{args.inputs}] start")
         Action(args).add_subtitles()
 
     elif args.union:
