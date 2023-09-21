@@ -9,9 +9,11 @@ from pathlib import Path
 def escape_windows_path(path):
     # 将单个反斜杠替换为双反斜杠
     sub = re.sub(r'\\', r'\\\\', path)
+    sub = sub.replace("\"", "\'")
     split = sub.split(":")
     if len(split) == 2:
         return split[0] + "\\" + ":" + split[1]
+
     return sub
 
 
