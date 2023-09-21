@@ -8,7 +8,11 @@ from pathlib import Path
 
 def escape_windows_path(path):
     # 将单个反斜杠替换为双反斜杠
-    return re.sub(r'\\', r'\\\\', path)
+    sub = re.sub(r'\\', r'\\\\', path)
+    split = sub.split(":")
+    if len(split) == 2:
+        return split[0] + "\\" + ":" + split[1]
+    return sub
 
 
 def is_windows():
@@ -34,7 +38,7 @@ def add_subtitles(video_file, subtitle_file, output_file):
         acodec='copy',  # 音频编解码器，此处保持原样
         scodec='mov_text',  # 字幕编解码器
         f='mp4',  # 输出文件格式
-        vf=f'subtitles={Path(subtitle_file)}',  # 添加字幕滤镜
+        vf=f'subtitles={subtitle_file}',  # 添加字幕滤镜
         strict='experimental',  # 使用实验性字幕编解码器
     )
 

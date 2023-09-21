@@ -135,7 +135,7 @@ class Action:
             # 文件输出路径
             outputs = self.args.outputs
             if outputs is not None:
-                output = outputs[i]
+                output = str(Path(outputs[i]).absolute())
             else:
                 output = os.path.join(output_dir, input_name + "_subtitle" + suffix)
 

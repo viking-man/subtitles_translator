@@ -64,7 +64,11 @@ def test_not():
 
 def escape_windows_path(path):
     # 将单个反斜杠替换为双反斜杠
-    return re.sub(r'\\', r'\\\\', path)
+    sub = re.sub(r'\\', r'\\\\', path)
+    split = sub.split(":")
+    if len(split) == 2:
+        return split[0] + "\\" + ":" + split[1]
+    return sub
 
 
 def test_escape():
