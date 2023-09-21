@@ -1,6 +1,6 @@
 import logging
-
 import ffmpeg
+from pathlib import Path
 
 
 def add_subtitles(video_file, subtitle_file, output_file):
@@ -17,7 +17,7 @@ def add_subtitles(video_file, subtitle_file, output_file):
         acodec='copy',  # 音频编解码器，此处保持原样
         scodec='mov_text',  # 字幕编解码器
         f='mp4',  # 输出文件格式
-        vf=f'subtitles={subtitle_file}',  # 添加字幕滤镜
+        vf=f'subtitles={Path(subtitle_file)}',  # 添加字幕滤镜
         strict='experimental',  # 使用实验性字幕编解码器
     )
 
