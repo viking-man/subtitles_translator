@@ -64,6 +64,7 @@ LANG = Literal[
 ]
 
 
+
 class WhisperModelEnum(Enum):
     TINY = "tiny"
     BASE = "base"
