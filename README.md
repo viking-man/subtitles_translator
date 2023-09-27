@@ -1,4 +1,5 @@
-# subtitles_translator 自动生成字幕、翻译字幕、添加字幕程序 [English Doc](english_doc.md)
+# subtitles_translator 自动生成字幕、翻译字幕、添加字幕程序 
+## [English Doc](english_doc.md)
 ## 该程序实现以下功能：
 1. 通过whisper实现：根据video/audio文件自动检测语言并生成对应语言的字幕
 2. 通过whisper实现：根据video/audio文件自动检测语言，并生成翻译后的英文字幕
