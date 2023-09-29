@@ -20,7 +20,6 @@ def escape_windows_path(path):
 def is_windows():
     return sys.platform.startswith('win')
 
-
 def add_subtitles(video_file, subtitle_file, output_file):
     # 使用 ffmpeg.input() 来指定输入文件和字幕文件
     input_video = ffmpeg.input(Path(video_file))
